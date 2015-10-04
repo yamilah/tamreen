@@ -5,16 +5,26 @@
   <title>Document</title>
 </head>
 <body onload="init();">
-  <canvas id="demoCanvas" width="500" height="300"></canvas>
+  <canvas id="demoCanvas" width="500" height="500"></canvas>
   <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
+  <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
   <script>
     function init() {
       var stage = new createjs.Stage("demoCanvas");
-      var circle = new create.Shape();
+      createjs.Ticker.setFPS(60);
+      var circle = new createjs.Shape();
       circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-      circle.x = 200;
+      circle.x = 100;
       circle.y = 100;
       stage.addChild(circle);
+
+      createjs.Tween.get(circle, {loop: true})
+      .to({y: 400}, 1000, createjs.Ease.getPowIn(2));
+
+      createjs.Tween.get(circle, {loop: true})
+      .to({x: 400}, 1000, createjs.Ease.linear());
+
+      createjs.Ticker.addEventListener("tick", stage);
     }
   </script>
 </body>
